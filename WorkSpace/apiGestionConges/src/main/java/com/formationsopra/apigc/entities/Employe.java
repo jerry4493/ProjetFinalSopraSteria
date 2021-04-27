@@ -6,9 +6,11 @@ import java.util.Set;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -40,10 +42,12 @@ public class Employe  {
 	@NotEmpty
 	private List<Conges> conges;
 	@NotEmpty
+	@ManyToOne
 	private Manager manager;
 	@NotEmpty
 	private Login login;
 	@NotEmpty
+	@ManyToOne
 	private Service service;
 	
 	public Employe() {
