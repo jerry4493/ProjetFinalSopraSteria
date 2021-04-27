@@ -1,0 +1,8 @@
+https://www.npmjs.com/package/@angular/cli
+
+créer un projet : ng new nomduprojet 
+créer un component : ng g component nomducomponent
+créer une classe : ng g class nomdudossier/nomdelaclasse
+créer un pipe : ng g pipe nomdudossier/nomdupipe
+créer g service : ng g service nomdudossier/nomduservice
+
