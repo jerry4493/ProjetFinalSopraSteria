@@ -23,11 +23,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "employes")
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@SequenceGenerator(name = "seqFormateur", sequenceName = "seq_formateur", initialValue = 100, allocationSize = 1)
+@SequenceGenerator(name = "seqEmploye", sequenceName = "seq_employe", initialValue = 100, allocationSize = 1)
 public class Employe  {
-	//@JsonView(Views.Common.class)
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormateur")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqEmploye")
 	private Integer id;
 	//@JsonView(Views.Common.class)
 	@NotEmpty
@@ -37,10 +37,8 @@ public class Employe  {
 	@Column(name = "nom", length = 150)
 	@NotEmpty
 	private String nom;
-	//@JsonView(Views.ManagerWithSub.class)
 	@NotEmpty
 	private List<Conges> conges;
-	//@JsonView({ Views.EmpWithManager.class, Views.Test.class })
 	@NotEmpty
 	private Manager manager;
 	@NotEmpty
