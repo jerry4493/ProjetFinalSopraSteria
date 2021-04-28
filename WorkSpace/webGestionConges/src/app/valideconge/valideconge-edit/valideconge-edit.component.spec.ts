@@ -8,9 +8,8 @@ describe('ValidecongeEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValidecongeEditComponent ]
-    })
-    .compileComponents();
+      declarations: [ValidecongeEditComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
