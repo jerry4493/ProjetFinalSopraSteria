@@ -1,5 +1,6 @@
 package com.formationsopra.apigc.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -19,15 +21,24 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
-@Table(name = "comges")
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Table(name = "conges")
 @SequenceGenerator(name = "seqConges", sequenceName = "seq_conges", initialValue = 100, allocationSize = 1)
-public class Conges  {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Conges.class)
+@JsonSerialize
+public class Conges implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8616944159904289315L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqConges")
@@ -38,80 +49,69 @@ public class Conges  {
 	@Column(name = "type", nullable = false)
 	private String TypeConge;
 	@NotEmpty
-	@Column(name = "datedemande", length = 15, nullable = false)
+	@Column(name = "date_demande", length = 15, nullable = false)
 	private LocalDate DateDemande;
 	@NotEmpty
-	@Column(name = "début", length = 15, nullable = false)
+	@Column(name = "date_debut", length = 15, nullable = false)
 	private LocalDate DateDebut;
 	@NotEmpty
-	@Column(name = "fin", length = 15, nullable = false)
+	@Column(name = "date_fin", length = 15, nullable = false)
 	private LocalDate DateFin;
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	@NotEmpty
 	private String motif;
-	
-	public Conges() {
-		}
 
+	public Conges() {
+	}
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getTypeConge() {
 		return TypeConge;
 	}
 
-
 	public void setTypeConge(String typeConge) {
 		TypeConge = typeConge;
 	}
-
 
 	public LocalDate getDateDemande() {
 		return DateDemande;
 	}
 
-
 	public void setDateDemande(LocalDate dateDemande) {
 		DateDemande = dateDemande;
 	}
-
 
 	public LocalDate getDateDebut() {
 		return DateDebut;
 	}
 
-
 	public void setDateDebut(LocalDate dateDebut) {
 		DateDebut = dateDebut;
 	}
-
 
 	public LocalDate getDateFin() {
 		return DateFin;
 	}
 
-
 	public void setDateFin(LocalDate dateFin) {
 		DateFin = dateFin;
 	}
-
 
 	public String getMotif() {
 		return motif;
 	}
 
-
 	public void setMotif(String motif) {
 		this.motif = motif;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -137,6 +137,5 @@ public class Conges  {
 			return false;
 		return true;
 	}
-	
+
 }
-	

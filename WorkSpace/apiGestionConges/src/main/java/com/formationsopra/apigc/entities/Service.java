@@ -1,5 +1,6 @@
 package com.formationsopra.apigc.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,17 +12,31 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "service")
 @SequenceGenerator(name = "seqService", sequenceName = "seq_service", initialValue = 10, allocationSize = 1)
-public class Service {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Service.class)
+@JsonSerialize
+public class Service implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4896302198779264168L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqService")
 	private Integer id;
+	@NotEmpty
 	@Column(name = "nom", unique = true, nullable = false)
 	private String nom;
+	@NotEmpty
 	@OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
 	private List<Employe> employes;
 
