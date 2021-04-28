@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formationsopra.apigc.entities.Conges;
 import com.formationsopra.apigc.entities.Employe;
+import com.formationsopra.apigc.entities.Role;
 import com.formationsopra.apigc.repositories.EmployeRepository;
-
 
 @RestController
 @RequestMapping("/employe")
@@ -24,54 +25,69 @@ public class EmployeWebService {
 
 	@Autowired
 	private EmployeRepository employeRepository;
-	
 
 	@GetMapping(value = "/list", produces = "application/json")
 	public List<Employe> getAll() {
 		return employeRepository.findAll();
 	}
-	
+
 	@GetMapping(value = "/get/{pId}", produces = "application/json")
 	public Employe getOne(@PathVariable("pId") Integer id) {
 		return employeRepository.getOne(id);
 	}
-	
+
 	@PostMapping(value = "/add", produces = "application/json")
 	public Employe addOne(@RequestBody Employe employe) {
 		try {
 			Employe temp = employeRepository.save(employe);
+			Role role = temp.getLogin().getRole();
+			if (role != Role.ROLE_USER) {
+				System.out.println("Le role attribué n'est pas bon !");
+			}else {
+				System.out.println("Le role attribué est bon !");
+			}
 			return temp;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-		
-		@PutMapping(value = "/update", produces = "application/json")
-		public Employe updateOne(@RequestBody Employe employe) {
-			return employeRepository.save(employe);
+
+	@PutMapping(value = "/update", produces = "application/json")
+	public Employe updateOne(@RequestBody Employe employe) {
+		return employeRepository.save(employe);
+	}
+
+	@DeleteMapping(value = "/delete/{pId}", produces = "application/json")
+	public boolean deleteOne(@PathVariable("pId") Integer id) {
+		try {
+			employeRepository.deleteById(id);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		@DeleteMapping(value = "/delete/{pId}", produces = "application/json")
-		public boolean deleteOne(@PathVariable("pId") Integer id) {
-			try {
-				employeRepository.deleteById(id);
-				return true;
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}
-			return false;
+		return false;
+	}
+
+	@DeleteMapping(value = "/delete", produces = "application/json")
+	public boolean delete(@RequestBody Employe employe) {
+		try {
+			employeRepository.delete(employe);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		@DeleteMapping(value = "/delete", produces = "application/json")
-		public boolean delete(@RequestBody Employe employe) {
-			try {
-				employeRepository.delete(employe);
-				return true;
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}
-			return false;
-		}
+		return false;
+	}
 	
+	@GetMapping(value = "/list/{pId}", produces = "application/json")
+	public List<Employe> getAllByManager(@PathVariable("pId") Integer id) {
+		return employeRepository.findAllByManagerId(id);
+	}
+	
+	@GetMapping(value = "/list/{pId}", produces = "application/json")
+	public List<Employe> getAllByService(@PathVariable("pId") Integer id) {
+		return employeRepository.findAllByServiceId(id);
+	}
+
 }

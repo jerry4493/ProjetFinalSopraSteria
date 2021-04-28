@@ -23,18 +23,17 @@ public class LoginWebService {
 
 	@Autowired
 	private LoginRepository loginRepository;
-	
 
 	@GetMapping(value = "/list", produces = "application/json")
 	public List<Login> getAll() {
 		return loginRepository.findAll();
 	}
-	
+
 	@GetMapping(value = "/get/{pId}", produces = "application/json")
 	public Login getOne(@PathVariable("pId") Integer id) {
 		return loginRepository.getOne(id);
 	}
-	
+
 	@PostMapping(value = "/add", produces = "application/json")
 	public Login addOne(@RequestBody Login login) {
 		try {
@@ -45,32 +44,32 @@ public class LoginWebService {
 			return null;
 		}
 	}
-		
-		@PutMapping(value = "/update", produces = "application/json")
-		public Login updateOne(@RequestBody Login login) {
-			return loginRepository.save(login);
+
+	@PutMapping(value = "/update", produces = "application/json")
+	public Login updateOne(@RequestBody Login login) {
+		return loginRepository.save(login);
+	}
+
+	@DeleteMapping(value = "/delete/{pId}", produces = "application/json")
+	public boolean deleteOne(@PathVariable("pId") Integer id) {
+		try {
+			loginRepository.deleteById(id);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		@DeleteMapping(value = "/delete/{pId}", produces = "application/json")
-		public boolean deleteOne(@PathVariable("pId") Integer id) {
-			try {
-				loginRepository.deleteById(id);
-				return true;
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}
-			return false;
+		return false;
+	}
+
+	@DeleteMapping(value = "/delete", produces = "application/json")
+	public boolean delete(@RequestBody Login login) {
+		try {
+			loginRepository.delete(login);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		@DeleteMapping(value = "/delete", produces = "application/json")
-		public boolean delete(@RequestBody Login login) {
-			try {
-				loginRepository.delete(login);
-				return true;
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}
-			return false;
-		}
-	
+		return false;
+	}
+
 }

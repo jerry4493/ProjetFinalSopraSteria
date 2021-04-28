@@ -11,8 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -26,8 +28,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
-@Table(name = "employes")
-@SequenceGenerator(name = "seqEmploye", sequenceName = "seq_employe", initialValue = 100, allocationSize = 1)
+@Table(name = "employe")
+@SequenceGenerator(name = "seqEmploye", sequenceName = "seq_employe", initialValue = 10, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Employe.class)
 @JsonSerialize
 public class Employe implements Serializable {
@@ -36,7 +38,7 @@ public class Employe implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 670425980100094539L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqEmploye")
 	private Integer id;
@@ -47,17 +49,45 @@ public class Employe implements Serializable {
 	@NotEmpty
 	private String nom;
 	@NotEmpty
+	@OneToMany//(mappedBy = "employe", fetch = FetchType.LAZY)
 	private List<Conges> conges;
 	@NotEmpty
 	@ManyToOne
-	private Manager manager;
+	@JoinColumn(name = "manager_id", referencedColumnName = "id")
+	private Employe manager;
 	@NotEmpty
+	@OneToOne
+	@JoinColumn(name = "login_id", referencedColumnName = "id")
 	private Login login;
 	@NotEmpty
 	@ManyToOne
+	@JoinColumn(name = "service_id", referencedColumnName = "id")
 	private Service service;
 
 	public Employe() {
+	}
+
+	public Employe(Integer id, @NotEmpty String prenom, @NotEmpty String nom, @NotEmpty List<Conges> conges,
+			@NotEmpty Manager manager, @NotEmpty Login login, @NotEmpty Service service) {
+		super();
+		this.id = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.conges = conges;
+		this.manager = manager;
+		this.login = login;
+		this.service = service;
+	}
+
+	public Employe(@NotEmpty String prenom, @NotEmpty String nom, @NotEmpty List<Conges> conges,
+			@NotEmpty Manager manager, @NotEmpty Login login, @NotEmpty Service service) {
+		super();
+		this.prenom = prenom;
+		this.nom = nom;
+		this.conges = conges;
+		this.manager = manager;
+		this.login = login;
+		this.service = service;
 	}
 
 	public Integer getId() {
