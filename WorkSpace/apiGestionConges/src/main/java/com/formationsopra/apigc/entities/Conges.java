@@ -30,10 +30,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "conges")
-@SequenceGenerator(name = "seqConges", sequenceName = "seq_conges", initialValue = 100, allocationSize = 1)
+@SequenceGenerator(name = "seqConges", sequenceName = "seq_conges", initialValue = 10, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Conges.class)
 @JsonSerialize
-public class Conges implements Serializable{
+public class Conges implements Serializable {
 
 	/**
 	 * 
@@ -63,6 +63,27 @@ public class Conges implements Serializable{
 	private String motif;
 
 	public Conges() {
+	}
+
+	public Conges(Integer id, @NotEmpty String typeConge, @NotEmpty LocalDate dateDemande,
+			@NotEmpty LocalDate dateDebut, @NotEmpty LocalDate dateFin, @NotEmpty String motif) {
+		super();
+		this.id = id;
+		TypeConge = typeConge;
+		DateDemande = dateDemande;
+		DateDebut = dateDebut;
+		DateFin = dateFin;
+		this.motif = motif;
+	}
+
+	public Conges(@NotEmpty String typeConge, @NotEmpty LocalDate dateDemande, @NotEmpty LocalDate dateDebut,
+			@NotEmpty LocalDate dateFin, @NotEmpty String motif) {
+		super();
+		TypeConge = typeConge;
+		DateDemande = dateDemande;
+		DateDebut = dateDebut;
+		DateFin = dateFin;
+		this.motif = motif;
 	}
 
 	public Integer getId() {

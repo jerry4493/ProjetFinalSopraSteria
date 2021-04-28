@@ -29,11 +29,11 @@ public class Admin extends Login implements Serializable{
 	}
 
 	public Admin(Integer id, @Email String email, @NotEmpty String password, Role role) {
-		super(id, email, password, role);
+		super(id, email, password, role = Role.ROLE_ADMIN);
 	}
 
 	public Admin(@Email String email, @NotEmpty String password, Role role) {
-		super(email, password, role);
+		super(email, password, role = Role.ROLE_ADMIN);
 	}
 	
 	
