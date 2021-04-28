@@ -1,5 +1,6 @@
 package com.formationsopra.apigc.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -19,23 +20,29 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "employes")
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SequenceGenerator(name = "seqEmploye", sequenceName = "seq_employe", initialValue = 100, allocationSize = 1)
-public class Employe  {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Employe.class)
+@JsonSerialize
+public class Employe implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 670425980100094539L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqEmploye")
 	private Integer id;
-	//@JsonView(Views.Common.class)
 	@NotEmpty
 	@Column(name = "prenom", length = 150, nullable = false)
 	private String prenom;
-	//@JsonView(Views.Common.class)
 	@Column(name = "nom", length = 150)
 	@NotEmpty
 	private String nom;
@@ -49,9 +56,9 @@ public class Employe  {
 	@NotEmpty
 	@ManyToOne
 	private Service service;
-	
+
 	public Employe() {
-		}
+	}
 
 	public Integer getId() {
 		return id;
@@ -108,7 +115,7 @@ public class Employe  {
 	public void setService(Service service) {
 		this.service = service;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -133,6 +140,5 @@ public class Employe  {
 			return false;
 		return true;
 	}
-	
+
 }
-	
