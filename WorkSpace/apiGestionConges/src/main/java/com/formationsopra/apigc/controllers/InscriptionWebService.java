@@ -3,6 +3,7 @@ package com.formationsopra.apigc.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,23 @@ import com.formationsopra.apigc.entities.Login;
 import com.formationsopra.apigc.repositories.LoginRepository;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/inscription")
 @CrossOrigin(origins = "*")
-public class LoginWebService {
+public class InscriptionWebService {
 
 	@Autowired
 	private LoginRepository loginRepository;
-
+	
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+//
+//	@GetMapping("/{login}")
+//	public boolean checkLogin(@PathVariable("login") String login) {
+//		loginRepository.findBy
+//		return true;
+//	}
+	
+	//=============== CRUD
 	@GetMapping(value = "/list", produces = "application/json")
 	public List<Login> getAll() {
 		return loginRepository.findAll();

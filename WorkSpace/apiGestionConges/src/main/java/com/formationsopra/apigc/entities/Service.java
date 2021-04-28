@@ -3,6 +3,7 @@ package com.formationsopra.apigc.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,12 +15,17 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "service")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SequenceGenerator(name = "seqService", sequenceName = "seq_service", initialValue = 10, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Service.class)
 @JsonSerialize
@@ -29,15 +35,13 @@ public class Service implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4896302198779264168L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqService")
 	private Integer id;
-	@NotEmpty
 	@Column(name = "nom", unique = true, nullable = false)
 	private String nom;
-	@NotEmpty
-	@OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "service", fetch = FetchType.EAGER)
 	private List<Employe> employes;
 
 	public Service() {
@@ -104,6 +108,11 @@ public class Service implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Service [id=" + id + ", nom=" + nom + ", employes=" + employes + "]";
 	}
 
 }

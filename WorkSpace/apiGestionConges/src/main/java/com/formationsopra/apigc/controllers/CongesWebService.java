@@ -72,9 +72,9 @@ public class CongesWebService {
 		return false;
 	}
 	
-	@GetMapping(value = "/list/{pId}", produces = "application/json")
-	public List<Conges> getAllByEmploye(@PathVariable("pId") Integer id) {
-		return congesRepository.findAllByEmployeId(id);
-	}
+//	@GetMapping(value = "/list/{pId}", produces = "application/json")
+//	public List<Conges> getAllByEmploye(@PathVariable("pId") Integer id) {
+//		return congesRepository.findAllByEmployeId(id);
+//	}
 
 }

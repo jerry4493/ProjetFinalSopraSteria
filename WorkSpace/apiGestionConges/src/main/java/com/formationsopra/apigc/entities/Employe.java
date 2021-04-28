@@ -2,7 +2,6 @@ package com.formationsopra.apigc.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -23,12 +22,13 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "employe")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SequenceGenerator(name = "seqEmploye", sequenceName = "seq_employe", initialValue = 10, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Employe.class)
 @JsonSerialize
@@ -42,24 +42,18 @@ public class Employe implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqEmploye")
 	private Integer id;
-	@NotEmpty
 	@Column(name = "prenom", length = 150, nullable = false)
 	private String prenom;
 	@Column(name = "nom", length = 150)
-	@NotEmpty
 	private String nom;
-	@NotEmpty
-	@OneToMany//(mappedBy = "employe", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY)
 	private List<Conges> conges;
-	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "manager_id", referencedColumnName = "id")
 	private Employe manager;
-	@NotEmpty
 	@OneToOne
-	@JoinColumn(name = "login_id", referencedColumnName = "id")
+	//@JoinColumn(name = "login_id", referencedColumnName = "id")
 	private Login login;
-	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "service_id", referencedColumnName = "id")
 	private Service service;
@@ -169,6 +163,12 @@ public class Employe implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Employe [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", conges=" + conges + ", manager="
+				+ manager + ", login=" + login + ", service=" + service + "]";
 	}
 
 }

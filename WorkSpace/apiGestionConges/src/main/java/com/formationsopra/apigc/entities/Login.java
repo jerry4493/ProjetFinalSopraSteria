@@ -33,14 +33,11 @@ public class Login implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqLogin")
 	private Integer id;
-	@NotEmpty
 	@Email
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
-	@NotEmpty
 	@Column(name = "password", nullable = false)
 	private String password;
-	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
 	private Role role;

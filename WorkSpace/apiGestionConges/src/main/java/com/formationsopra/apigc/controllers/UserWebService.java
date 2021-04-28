@@ -19,7 +19,7 @@ import com.formationsopra.apigc.entities.Role;
 import com.formationsopra.apigc.repositories.EmployeRepository;
 
 @RestController
-@RequestMapping("/employe")
+@RequestMapping("/user")
 @CrossOrigin(origins = "*")
 public class UserWebService {
 
@@ -28,7 +28,10 @@ public class UserWebService {
 
 	@GetMapping(value = "/list", produces = "application/json")
 	public List<Employe> getAllUser() {
-		return userRepository.findAllEmploye();
+		return userRepository.findAllUser();
+//		List<Employe> listeTemp = userRepository.findAll();
+//		
+//		return listeTemp;
 	}
 
 	@GetMapping(value = "/get/{pId}", produces = "application/json")
@@ -43,7 +46,7 @@ public class UserWebService {
 			if (role != Role.ROLE_USER) {
 				userRepository.save(user);
 				System.out.println("Le role attribué n'est pas bon !");
-			}else {
+			} else {
 				System.out.println("Le role attribué est bon !");
 			}
 			return user;
@@ -79,15 +82,15 @@ public class UserWebService {
 		}
 		return false;
 	}
-	
-	@GetMapping(value = "/list/{pId}", produces = "application/json")
+
+	@GetMapping(value = "/listbyManager/{pId}", produces = "application/json")
 	public List<Employe> getAllByManager(@PathVariable("pId") Integer id) {
 		return userRepository.findAllEmployeByManagerId(id);
 	}
-	
-	@GetMapping(value = "/list/{pId}", produces = "application/json")
-	public List<Employe> getAllByService(@PathVariable("pId") Integer id, @PathVariable("pRole") String role) {
-		return userRepository.findAllEmployeByServiceId(id, role);
+
+	@GetMapping(value = "/listbyservice/{pId}", produces = "application/json")
+	public List<Employe> getAllByService(@PathVariable("pId") Integer id) {
+		return userRepository.findAllEmployeByServiceId(id);
 	}
 
 }
