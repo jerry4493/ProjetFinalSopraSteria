@@ -21,32 +21,32 @@ import com.formationsopra.apigc.repositories.EmployeRepository;
 @RestController
 @RequestMapping("/employe")
 @CrossOrigin(origins = "*")
-public class EmployeWebService {
+public class UserWebService {
 
 	@Autowired
-	private EmployeRepository employeRepository;
+	private EmployeRepository userRepository;
 
 	@GetMapping(value = "/list", produces = "application/json")
-	public List<Employe> getAll() {
-		return employeRepository.findAll();
+	public List<Employe> getAllUser() {
+		return userRepository.findAllEmploye();
 	}
 
 	@GetMapping(value = "/get/{pId}", produces = "application/json")
 	public Employe getOne(@PathVariable("pId") Integer id) {
-		return employeRepository.getOne(id);
+		return userRepository.getOne(id);
 	}
 
 	@PostMapping(value = "/add", produces = "application/json")
-	public Employe addOne(@RequestBody Employe employe) {
+	public Employe addOne(@RequestBody Employe user) {
 		try {
-			Employe temp = employeRepository.save(employe);
-			Role role = temp.getLogin().getRole();
+			Role role = user.getLogin().getRole();
 			if (role != Role.ROLE_USER) {
+				userRepository.save(user);
 				System.out.println("Le role attribué n'est pas bon !");
 			}else {
 				System.out.println("Le role attribué est bon !");
 			}
-			return temp;
+			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -54,14 +54,14 @@ public class EmployeWebService {
 	}
 
 	@PutMapping(value = "/update", produces = "application/json")
-	public Employe updateOne(@RequestBody Employe employe) {
-		return employeRepository.save(employe);
+	public Employe updateOne(@RequestBody Employe user) {
+		return userRepository.save(user);
 	}
 
 	@DeleteMapping(value = "/delete/{pId}", produces = "application/json")
 	public boolean deleteOne(@PathVariable("pId") Integer id) {
 		try {
-			employeRepository.deleteById(id);
+			userRepository.deleteById(id);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,9 +70,9 @@ public class EmployeWebService {
 	}
 
 	@DeleteMapping(value = "/delete", produces = "application/json")
-	public boolean delete(@RequestBody Employe employe) {
+	public boolean delete(@RequestBody Employe user) {
 		try {
-			employeRepository.delete(employe);
+			userRepository.delete(user);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,12 +82,12 @@ public class EmployeWebService {
 	
 	@GetMapping(value = "/list/{pId}", produces = "application/json")
 	public List<Employe> getAllByManager(@PathVariable("pId") Integer id) {
-		return employeRepository.findAllByManagerId(id);
+		return userRepository.findAllEmployeByManagerId(id);
 	}
 	
 	@GetMapping(value = "/list/{pId}", produces = "application/json")
-	public List<Employe> getAllByService(@PathVariable("pId") Integer id) {
-		return employeRepository.findAllByServiceId(id);
+	public List<Employe> getAllByService(@PathVariable("pId") Integer id, @PathVariable("pRole") String role) {
+		return userRepository.findAllEmployeByServiceId(id, role);
 	}
 
 }

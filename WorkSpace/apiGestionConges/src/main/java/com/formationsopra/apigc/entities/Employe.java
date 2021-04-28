@@ -68,7 +68,7 @@ public class Employe implements Serializable {
 	}
 
 	public Employe(Integer id, @NotEmpty String prenom, @NotEmpty String nom, @NotEmpty List<Conges> conges,
-			@NotEmpty Manager manager, @NotEmpty Login login, @NotEmpty Service service) {
+			@NotEmpty Employe manager, @NotEmpty Login login, @NotEmpty Service service) {
 		super();
 		this.id = id;
 		this.prenom = prenom;
@@ -80,7 +80,7 @@ public class Employe implements Serializable {
 	}
 
 	public Employe(@NotEmpty String prenom, @NotEmpty String nom, @NotEmpty List<Conges> conges,
-			@NotEmpty Manager manager, @NotEmpty Login login, @NotEmpty Service service) {
+			@NotEmpty Employe manager, @NotEmpty Login login, @NotEmpty Service service) {
 		super();
 		this.prenom = prenom;
 		this.nom = nom;
@@ -122,11 +122,11 @@ public class Employe implements Serializable {
 		this.conges = conges;
 	}
 
-	public Manager getManager() {
+	public Employe getManager() {
 		return manager;
 	}
 
-	public void setManager(Manager manager) {
+	public void setManager(Employe manager) {
 		this.manager = manager;
 	}
 

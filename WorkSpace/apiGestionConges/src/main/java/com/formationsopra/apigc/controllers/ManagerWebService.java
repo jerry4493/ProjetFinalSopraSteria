@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formationsopra.apigc.entities.Manager;
+import com.formationsopra.apigc.entities.Employe;
 import com.formationsopra.apigc.entities.Role;
-import com.formationsopra.apigc.repositories.ManagerRepository;
+import com.formationsopra.apigc.repositories.EmployeRepository;
 
 @RestController
 @RequestMapping("/manager")
@@ -23,29 +23,29 @@ import com.formationsopra.apigc.repositories.ManagerRepository;
 public class ManagerWebService {
 
 	@Autowired
-	private ManagerRepository managerRepository;
+	private EmployeRepository managerRepository;
 
 	@GetMapping(value = "/list", produces = "application/json")
-	public List<Manager> getAll() {
-		return managerRepository.findAll();
+	public List<Employe> getAllManager() {
+		return managerRepository.findAllManager();
 	}
 
 	@GetMapping(value = "/get/{pId}", produces = "application/json")
-	public Manager getOne(@PathVariable("pId") Integer id) {
+	public Employe getOneManager(@PathVariable("pId") Integer id) {
 		return managerRepository.getOne(id);
 	}
 
 	@PostMapping(value = "/add", produces = "application/json")
-	public Manager addOne(@RequestBody Manager manager) {
+	public Employe addOneManager(@RequestBody Employe manager) {
 		try {
-			Manager temp = managerRepository.save(manager);
-			Role role = temp.get
-			if (role != Role.ROLE_USER) {
+			Role role = manager.getLogin().getRole();
+			if (role != Role.ROLE_MANAGER) {
+				managerRepository.save(manager);
 				System.out.println("Le role attribué n'est pas bon !");
 			}else {
 				System.out.println("Le role attribué est bon !");
 			}
-			return temp;
+			return manager;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -53,7 +53,7 @@ public class ManagerWebService {
 	}
 
 	@PutMapping(value = "/update", produces = "application/json")
-	public Manager updateOne(@RequestBody Manager manager) {
+	public Employe updateOneManager(@RequestBody Employe manager) {
 		return managerRepository.save(manager);
 	}
 
@@ -69,7 +69,7 @@ public class ManagerWebService {
 	}
 
 	@DeleteMapping(value = "/delete", produces = "application/json")
-	public boolean delete(@RequestBody Manager manager) {
+	public boolean delete(@RequestBody Employe manager) {
 		try {
 			managerRepository.delete(manager);
 			return true;

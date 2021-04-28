@@ -47,7 +47,7 @@ public class Conges implements Serializable {
 	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", nullable = false)
-	private String TypeConge;
+	private TypeConge typeConges;
 	@NotEmpty
 	@Column(name = "date_demande", length = 15, nullable = false)
 	private LocalDate DateDemande;
@@ -65,21 +65,21 @@ public class Conges implements Serializable {
 	public Conges() {
 	}
 
-	public Conges(Integer id, @NotEmpty String typeConge, @NotEmpty LocalDate dateDemande,
+	public Conges(Integer id, @NotEmpty @NotEmpty TypeConge typeConge, @NotEmpty LocalDate dateDemande,
 			@NotEmpty LocalDate dateDebut, @NotEmpty LocalDate dateFin, @NotEmpty String motif) {
 		super();
 		this.id = id;
-		TypeConge = typeConge;
+		typeConges = typeConge;
 		DateDemande = dateDemande;
 		DateDebut = dateDebut;
 		DateFin = dateFin;
 		this.motif = motif;
 	}
 
-	public Conges(@NotEmpty String typeConge, @NotEmpty LocalDate dateDemande, @NotEmpty LocalDate dateDebut,
+	public Conges(@NotEmpty @NotEmpty TypeConge typeConge, @NotEmpty LocalDate dateDemande, @NotEmpty LocalDate dateDebut,
 			@NotEmpty LocalDate dateFin, @NotEmpty String motif) {
 		super();
-		TypeConge = typeConge;
+		typeConges = typeConge;
 		DateDemande = dateDemande;
 		DateDebut = dateDebut;
 		DateFin = dateFin;
@@ -94,12 +94,12 @@ public class Conges implements Serializable {
 		this.id = id;
 	}
 
-	public String getTypeConge() {
-		return TypeConge;
+	public TypeConge getTypeConge() {
+		return typeConges;
 	}
 
-	public void setTypeConge(String typeConge) {
-		TypeConge = typeConge;
+	public void setTypeConge(TypeConge typeConge) {
+		typeConges = typeConge;
 	}
 
 	public LocalDate getDateDemande() {
