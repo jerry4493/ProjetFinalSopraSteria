@@ -78,5 +78,10 @@ public class ManagerWebService {
 		}
 		return false;
 	}
+	
+	@GetMapping(value = "/list/{pId}", produces = "application/json")
+	public List<Employe> getAllByService(@PathVariable("pId") Integer id) {
+		return managerRepository.findAllManagerByServiceId(id);
+	}
 
 }

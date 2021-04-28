@@ -13,30 +13,23 @@ import com.formationsopra.apigc.entities.Employe;
 public interface EmployeRepository extends JpaRepository<Employe, Integer> {
 
 	// récupérer les employés en fonction d'un manager
-	@Query("select emp from Employe emp where emp.manager_id=:id")
+	@Query("select emp from Employe emp where emp.manager.id=:id")
 	public List<Employe> findAllEmployeByManagerId(@Param("id") Integer id);
 
 	// récupérer les employés en fonction d'un service
-	@Query("select emp from Employe emp left join fetch emp.login log where emp.service_id=:id and log.role=:role")
-	public List<Employe> findAllEmployeByServiceId(@Param("id") Integer id, @Param("role") String role);
+	@Query("select emp from Employe emp left join fetch emp.login where emp.service.id=:id and emp.login.role='ROLE_USER'")
+	public List<Employe> findAllEmployeByServiceId(@Param("id") Integer id);
 
 	// récupérer les employés en fonction d'un service
-	@Query("select emp from Employe emp left join fetch emp.login log where emp.service_id=:id and log.role=:role")
-	public List<Employe> findAllManagerByServiceId(@Param("id") Integer id, @Param("role") String role);
+	@Query("select emp from Employe emp left join fetch emp.login where emp.service.id=:id and emp.login.role='ROLE_MANAGER'")
+	public List<Employe> findAllManagerByServiceId(@Param("id") Integer id);
 
 	// récupérer les managers
-	@Query("select emp from Employe emp left join fetch emp.login log where log.role='ROLE_MANAGER'")
+	@Query("select emp from Employe emp left join fetch emp.login where emp.login.role='ROLE_MANAGER'")
 	public List<Employe> findAllManager();
 
 	// récupérer les employes
-	@Query("select emp from Employe emp  left join fetch emp.login log where log.role='ROLE_USER'")
-	public List<Employe> findAllEmploye();
-
-	
-	
-	
-	//public List<Employe> findAllByManager(Integer id);
-
-	//public List<Employe> findAllByService(Integer id);
+	@Query("select emp from Employe emp  left join fetch emp.login where emp.login.role='ROLE_USER'")
+	public List<Employe> findAllUser();
 
 }

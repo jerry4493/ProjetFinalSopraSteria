@@ -13,7 +13,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -30,6 +32,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "conges")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SequenceGenerator(name = "seqConges", sequenceName = "seq_conges", initialValue = 10, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Conges.class)
 @JsonSerialize
@@ -44,46 +48,46 @@ public class Conges implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqConges")
 	private Integer id;
 
-	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", nullable = false)
 	private TypeConge typeConges;
-	@NotEmpty
 	@Column(name = "date_demande", length = 15, nullable = false)
 	private LocalDate DateDemande;
-	@NotEmpty
 	@Column(name = "date_debut", length = 15, nullable = false)
 	private LocalDate DateDebut;
-	@NotEmpty
 	@Column(name = "date_fin", length = 15, nullable = false)
 	private LocalDate DateFin;
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
-	@NotEmpty
 	private String motif;
+	@ManyToOne
+	@JoinColumn(name = "employe_id", referencedColumnName = "id")
+	private Employe employe;
 
 	public Conges() {
 	}
 
-	public Conges(Integer id, @NotEmpty @NotEmpty TypeConge typeConge, @NotEmpty LocalDate dateDemande,
-			@NotEmpty LocalDate dateDebut, @NotEmpty LocalDate dateFin, @NotEmpty String motif) {
+	public Conges(Integer id, TypeConge typeConges, LocalDate dateDemande, LocalDate dateDebut, LocalDate dateFin,
+			String motif, Employe employe) {
 		super();
 		this.id = id;
-		typeConges = typeConge;
+		this.typeConges = typeConges;
 		DateDemande = dateDemande;
 		DateDebut = dateDebut;
 		DateFin = dateFin;
 		this.motif = motif;
+		this.employe = employe;
 	}
 
-	public Conges(@NotEmpty @NotEmpty TypeConge typeConge, @NotEmpty LocalDate dateDemande, @NotEmpty LocalDate dateDebut,
-			@NotEmpty LocalDate dateFin, @NotEmpty String motif) {
+	public Conges(TypeConge typeConges, LocalDate dateDemande, LocalDate dateDebut, LocalDate dateFin, String motif,
+			Employe employe) {
 		super();
-		typeConges = typeConge;
+		this.typeConges = typeConges;
 		DateDemande = dateDemande;
 		DateDebut = dateDebut;
 		DateFin = dateFin;
 		this.motif = motif;
+		this.employe = employe;
 	}
 
 	public Integer getId() {
@@ -92,14 +96,6 @@ public class Conges implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public TypeConge getTypeConge() {
-		return typeConges;
-	}
-
-	public void setTypeConge(TypeConge typeConge) {
-		typeConges = typeConge;
 	}
 
 	public LocalDate getDateDemande() {
@@ -132,6 +128,22 @@ public class Conges implements Serializable {
 
 	public void setMotif(String motif) {
 		this.motif = motif;
+	}
+
+	public TypeConge getTypeConges() {
+		return typeConges;
+	}
+
+	public void setTypeConges(TypeConge typeConges) {
+		this.typeConges = typeConges;
+	}
+
+	public Employe getEmploye() {
+		return employe;
+	}
+
+	public void setEmploye(Employe employe) {
+		this.employe = employe;
 	}
 
 	@Override

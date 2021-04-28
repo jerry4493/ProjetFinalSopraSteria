@@ -10,7 +10,7 @@ import com.formationsopra.apigc.entities.Conges;
 @Repository
 public interface CongesRepository extends JpaRepository<Conges, Integer> {
 	
-	public List<Conges> findAllByEmployeId(Integer id);
+	//public List<Conges> findAllByEmployeId(Integer id);
 
 }
 
