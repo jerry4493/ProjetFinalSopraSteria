@@ -1,4 +1,4 @@
-import { DemandecongeService } from './demandeconge-service';
+import { DemandecongeService } from './demandeconge.service';
 
 describe('DemandecongeService', () => {
   it('should create an instance', () => {
