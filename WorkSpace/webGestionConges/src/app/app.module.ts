@@ -1,9 +1,13 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { DemandecongeEditComponent } from './demandeconge/demandeconge-edit/demandeconge-edit.component';
 import { DemandecongeListComponent } from './demandeconge/demandeconge-list/demandeconge-list.component';
+import { routes } from './routes';
 import { ValidecongeEditComponent } from './valideconge/valideconge-edit/valideconge-edit.component';
 import { ValidecongeListComponent } from './valideconge/valideconge-list/valideconge-list.component';
 import { LoginComponent } from './login/login.component';
