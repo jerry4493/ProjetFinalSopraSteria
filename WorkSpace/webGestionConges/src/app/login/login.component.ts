@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Employe } from '../model/employe';
 import { Login } from '../model/login';
 import { AuthentificationService } from '../services/authentification.service';
 
@@ -10,11 +11,13 @@ import { AuthentificationService } from '../services/authentification.service';
 })
 export class LoginComponent implements OnInit {
   login: Login = new Login();
+  employe: Employe = new Employe();
   message: string;
 
-  constructor() {}
-  private authentificationService: AuthentificationService;
-  private router: Router;
+  constructor(
+    private authentificationService: AuthentificationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -26,7 +29,9 @@ export class LoginComponent implements OnInit {
           'auth',
           btoa(this.login.email + ':' + this.login.password)
         );
+
         localStorage.setItem('login', this.login.email);
+
         this.router.navigate(['/home']);
       },
       (error) => {

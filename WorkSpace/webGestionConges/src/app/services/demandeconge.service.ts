@@ -7,8 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DemandecongeService {
-
-  private static URL = 'http://127.0.0.1:8080/projet/api/demandeconge';
+  private static URL = 'http://127.0.0.1:3000/projet/api/conge';
   private httpHeaders: HttpHeaders;
 
   constructor(private http: HttpClient) {
@@ -21,7 +20,6 @@ export class DemandecongeService {
       Authorization: `Basic ${localStorage.getItem('auth')}`,
     });
   }
-
 
   public getDemandeConge(id: number): Observable<Conges> {
     this.initHeader();
@@ -37,11 +35,11 @@ export class DemandecongeService {
     });
   }
 
-
   public update(conges: Conges): Observable<Conges> {
     this.initHeader();
     return this.http.put<Conges>(
-      DemandecongeService.URL + '/' + conges.id, conges,
+      DemandecongeService.URL + '/' + conges.id,
+      conges,
       {
         headers: this.httpHeaders,
       }
@@ -54,7 +52,7 @@ export class DemandecongeService {
       dateDemande: conges.dateDemande,
       dateDebut: conges.dateDebut,
       dateFin: conges.dateFin,
-      motif: conges.motif
+      motif: conges.motif,
     };
     return this.http.post<Conges>(DemandecongeService.URL, congesFormate, {
       headers: this.httpHeaders,
@@ -67,6 +65,4 @@ export class DemandecongeService {
       headers: this.httpHeaders,
     });
   }
-
-
 }
