@@ -43,7 +43,7 @@ public class InscriptionWebService {
 //		login.setPassword(passwordEncoder.encode(login.getPassword()));
 //		loginRepository.save(login);
 //	}
-//	
+	
 	//=============== CRUD
 	@GetMapping(value = "/list", produces = "application/json")
 	public List<Login> getAll() {

@@ -4,29 +4,28 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Conges } from './../../model/conges';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Login } from 'src/app/model/login';
 
 @Component({
   selector: 'app-demandeconge-edit',
   templateUrl: './demandeconge-edit.component.html',
-  styleUrls: ['./demandeconge-edit.component.css']
+  styleUrls: ['./demandeconge-edit.component.css'],
 })
 export class DemandecongeEditComponent implements OnInit {
   conge: Conges = new Conges();
-  employe: Employe= new Employe();
+  employe: Employe = new Employe();
+  login: Login = new Login();
   id: number = -1;
   pipe = new DatePipe('en-FR');
   now = Date.now();
 
   dateajd = this.pipe.transform(this.now, 'dd/MM/yyyy');
 
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private demandecongeService: DemandecongeService,
-    private router: Router,
-
+    private router: Router
   ) {
-
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         this.id = params.id;
@@ -37,8 +36,7 @@ export class DemandecongeEditComponent implements OnInit {
       }
     });
 
-    let debut = Date.now()
-
+    let debut = Date.now();
   }
 
   ngOnInit(): void {}
@@ -54,7 +52,4 @@ export class DemandecongeEditComponent implements OnInit {
       });
     }
   }
-
-
-
 }

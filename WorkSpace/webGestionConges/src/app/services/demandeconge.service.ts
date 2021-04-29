@@ -1,3 +1,4 @@
+import { Employe } from 'src/app/model/employe';
 import { Conges } from './../model/conges';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DemandecongeService {
-  private static URL = 'http://127.0.0.1:9001/projet/api/conge';
+  private static URL = 'http://127.0.0.1:9001/api/conges';
   private httpHeaders: HttpHeaders;
 
   constructor(private http: HttpClient) {
@@ -31,6 +32,13 @@ export class DemandecongeService {
   public getConges(): Observable<Conges[]> {
     this.initHeader();
     return this.http.get<Conges[]>(DemandecongeService.URL, {
+      headers: this.httpHeaders,
+    });
+  }
+
+  public getEmploye(id: number): Observable<Employe[]> {
+    this.initHeader();
+    return this.http.get<Employe[]>(DemandecongeService.URL + '/' + id, {
       headers: this.httpHeaders,
     });
   }
