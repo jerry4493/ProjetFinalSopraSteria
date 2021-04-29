@@ -1,1 +1,21 @@
-<p>demandeconge-list works!</p>
+<h1>liste des congés</h1>
+<table class="table">
+  <tr *ngFor="let conge of conges">
+    <td>{{ conge.id }}</td>
+    <td>{{ conge.dateDebut }}</td>
+    <td>{{ conge.dateFin }}</td>
+    <td>
+      <a
+        [routerLink]="['/conge', 'edit', conge.id]"
+        class="btn btn-outline-info"
+        >edition</a
+      >
+    </td>
+    <td>
+      <button (click)="delete(conge.id)" class="btn btn-outline-danger">
+        supprimer
+      </button>
+    </td>
+  </tr>
+</table>
+<a routerLink="/conge/edit" class="btn btn-link">ajouter un jour de congé</a>

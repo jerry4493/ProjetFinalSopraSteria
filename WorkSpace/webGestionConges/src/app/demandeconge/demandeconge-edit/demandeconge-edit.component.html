@@ -1,1 +1,107 @@
-<p>demandeconge-edit works!</p>
+<div class="container">
+<div>
+  <h1>DEMANDE DE CONGES</h1>
+  <div>
+    <div class="form-group">
+      <label for="id">id:</label>
+      <input id="id"
+      [(ngModel)]="employe.id"
+      class="form-control"
+      placeholder="generation automatique"
+      readonly />
+    </div>
+
+    <div class="form-group">
+      <label for="prenom">prenom:</label>
+      <input id="prenom"
+      [(ngModel)]="employe.prenom"
+      class="form-control"
+      placeholder=employe.prenom
+      readonly />
+    </div>
+
+    <div class="form-group">
+      <label for="nom">nom:</label>
+      <input id="nom" [(ngModel)]="employe.nom" class="form-control" placeholder=employe.nom readonly/>
+    </div>
+
+
+    <div class="form-group">
+      <label for="dateDemande">Date de demande:</label>
+      <input id="dateDemande"
+      [(ngModel)]="conge.dateDemande"
+      class="form-control"
+      type="text"
+      placeholder={{dateajd}}
+      readonly />
+    </div>
+
+
+    <div class="form-group" [(ngModel)]="conge.typeConge">
+      <label for="typeConge">Type de congé:</label>
+    <table style="width:650px">
+        <tr>
+          <td> <input type="radio" id="congepayes" name="typeconge" value="congepayes"
+              checked>&nbsp;
+          <label for="congepayes">Congés payés</label>
+          </td>
+      <td>
+        <input type="radio" id="congesanssolde" name="typeconge" value="congesanssolde"> &nbsp;
+        <label for="congesanssolde">Congés sans soldes</label>
+      </td>
+      <td>
+        <input type="radio" id="absautor" name="typeconge" value="absautor"> &nbsp;
+        <label for="absautor">Absence autorisée</label>
+      </td>
+      <td>
+        <input type="radio" id="absjusti" name="typeconge" value="absjusti"> &nbsp;
+        <label for="absjusti">Absence justifiée</label>
+      </td>
+      </tr>
+
+  </table>
+  </div>
+    <div class="form-group">
+      <label for="dateDebutConge">Date de début de congé:</label>
+      <input id="dateDebutConge"
+      [(ngModel)]="conge.dateDebut"
+      type="date"
+      class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="dateFinConge">Date de fin de congé:</label>
+      <input id="dateFinConge"
+      [(ngModel)]="conge.dateFin"
+      type="date"
+      class="form-control" />
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="typeConge">Choisissez un type de congé:</label>
+      <select class="form-control">
+        <option
+          *ngFor="let typeConge of typeConges | async"
+          [ngValue]="typeConge"
+        >
+          {{ typeConge.nom }}
+        </option>
+      </select>
+    </div> -->
+
+    <div class="form-group">
+      <label for="motifConge">Motif de congé:</label>
+      <textarea class="form-control" cols="2" rows="5" id="motifConge" [(ngModel)]="conge.motif"></textarea>
+
+    </div>
+
+    <div class="form-group">
+      <button (click)="save()" class="btn btn-outline-success">
+        enregistrer
+      </button>
+      <a class="btn btn-outline-warning" routerLink="/conge">annuler</a>
+    </div>
+  </div>
+</div>
+</div>
+

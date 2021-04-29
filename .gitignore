@@ -1,2 +1,4 @@
 
-WorkSpace/webGestionConges/package.json
+WorkSpace/webGestionConges/package-lock.json
+
+*.json

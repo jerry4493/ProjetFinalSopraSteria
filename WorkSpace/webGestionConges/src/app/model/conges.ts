@@ -5,6 +5,8 @@ export class Conges {
     private _dateDebut?: Date,
     private _dateFin?: Date,
     private _motif?: string,
+    private _typeConge?: string
+
     private _type?: string
   ) {}
 
@@ -46,6 +48,14 @@ export class Conges {
 
   public set motif(value: string) {
     this._motif = value;
+  }
+
+  public get typeConge(): string {
+    return this._typeConge;
+  }
+
+  public set typeConge(value: string) {
+    this._typeConge = value;
   }
 
   public get type(): string {
