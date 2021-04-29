@@ -1,4 +1,7 @@
+import { Conges } from './../../model/conges';
 import { Component, OnInit } from '@angular/core';
+import { DemandecongeService } from './../../services/demandeconge.service';
+
 
 @Component({
   selector: 'app-demandeconge-list',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DemandecongeListComponent implements OnInit {
 
-  constructor() { }
+  conges: Conges[];
+  constructor(private demandecongeService: DemandecongeService) {}
 
   ngOnInit(): void {
+    this.list();
   }
 
+  delete(id: number) {
+    this.demandecongeService.delete(id).subscribe((res) => {
+      this.list();
+    });
+  }
+
+
+  private list() {
+    this.demandecongeService.getConges().subscribe((data) => {
+      this.conges = data;
+    });
+  }
 }
