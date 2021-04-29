@@ -1,6 +1,7 @@
 package com.formationsopra.apigc.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,8 +42,8 @@ public class InscriptionWebService {
 	}
 
 	@GetMapping(value = "/get/{pId}", produces = "application/json")
-	public Login getOne(@PathVariable("pId") Integer id) {
-		return loginRepository.getOne(id);
+	public Optional<Login> getOne(@PathVariable("pId") Integer id) {
+		return loginRepository.findById(id);
 	}
 
 	@PostMapping(value = "/add", produces = "application/json")
