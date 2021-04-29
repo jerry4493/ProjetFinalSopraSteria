@@ -6,8 +6,9 @@
         <label for="id">id:</label>
         <input
           id="id"
-          [(ngModel)]="employe.id"
           class="form-control"
+          ngDefaultControl
+          [(ngModel)]="employe.id"
           placeholder="generation automatique"
           readonly
         />
@@ -17,8 +18,9 @@
         <label for="prenom">prenom:</label>
         <input
           id="prenom"
-          [(ngModel)]="employe.prenom"
           class="form-control"
+          ngDefaultControl
+          [(ngModel)]="login.email"
           readonly
         />
       </div>
@@ -27,8 +29,9 @@
         <label for="nom">nom:</label>
         <input
           id="nom"
-          [(ngModel)]="employe.nom"
           class="form-control"
+          ngDefaultControl
+          [(ngModel)]="employe.nom"
           readonly
         />
       </div>
@@ -37,15 +40,16 @@
         <label for="dateDemande">Date de demande:</label>
         <input
           id="dateDemande"
-          [(ngModel)]="conge.dateDemande"
           class="form-control"
+          ngDefaultControl
+          [(ngModel)]="conge.dateDemande"
           type="text"
           placeholder="{{ dateajd }}"
           readonly
         />
       </div>
 
-      <div class="form-group" [(ngModel)]="conge.typeConge">
+      <div class="form-group" ngDefaultControl [(ngModel)]="conge.typeConge">
         <label for="typeConge">Type de congé:</label>
         <table style="width: 650px">
           <tr>
@@ -96,9 +100,10 @@
         <label for="dateDebutConge">Date de début de congé:</label>
         <input
           id="dateDebutConge"
+          class="form-control"
+          ngDefaultControl
           [(ngModel)]="conge.dateDebut"
           type="date"
-          class="form-control"
         />
       </div>
 
@@ -106,9 +111,10 @@
         <label for="dateFinConge">Date de fin de congé:</label>
         <input
           id="dateFinConge"
+          class="form-control"
+          ngDefaultControl
           [(ngModel)]="conge.dateFin"
           type="date"
-          class="form-control"
         />
       </div>
 
@@ -128,6 +134,7 @@
         <label for="motifConge">Motif de congé:</label>
         <textarea
           class="form-control"
+          ngDefaultControl
           cols="2"
           rows="5"
           id="motifConge"

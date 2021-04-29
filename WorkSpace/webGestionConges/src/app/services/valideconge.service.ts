@@ -7,7 +7,7 @@ import { Conges } from '../model/conges';
   providedIn: 'root',
 })
 export class ValidecongeService {
-  private static URL = 'http://127.0.0.1:9001/projet/api/validation';
+  private static URL = 'http://127.0.0.1:9001/api/validation';
   private httpHeaders: HttpHeaders;
 
   constructor(private http: HttpClient) {
