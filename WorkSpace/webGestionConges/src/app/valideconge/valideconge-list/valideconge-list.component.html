@@ -1,0 +1,21 @@
+<div>
+  <h1>liste des demandes de congés</h1>
+  <table class="table">
+    <tr *ngFor="let conge of demandeconge | async">
+      <td>{{ employe.nom }}</td>
+      <td>{{ conge.typeConge }}</td>
+      <td>{{ conge.dateDebut | date: "dd/MM/yyyy" }}</td>
+      <td>{{ conge.dateFin | date: "dd/MM/yyyy" }}</td>
+      <td>{{ conge.motif }}</td>
+      <td>{{ employe.service }}</td>
+      <td>
+        <a
+          class="btn btn-outline-info"
+          [routerLink]="['/validation', 'edit', conge.id]"
+          routerLinkActive="active"
+          >examiner la demande</a
+        >
+      </td>
+    </tr>
+  </table>
+</div>

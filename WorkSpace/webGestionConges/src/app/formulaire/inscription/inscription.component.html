@@ -1,0 +1,134 @@
+<div>
+  <h1>Inscription</h1>
+  <form (ngSubmit)="send()" [formGroup]="form">
+    <div class="form-group">
+      <label>Nom:</label>
+      <input
+        name="Nom"
+        class="form-control"
+        placeholder="Votre nom"
+        [formControl]="nomCtrl"
+      />
+      <div class="alert alert-danger" *ngIf="nomIsInvalid()">
+        <span *ngIf="nomCtrl.hasError('required')"> Nom obligatoire </span>
+        <span *ngIf="nomCtrl.hasError('minlength')"> Nom obligatoire </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Prénom:</label>
+      <input
+        name="Prénom"
+        class="form-control"
+        placeholder="Votre prénom"
+        [formControl]="prenomCtrl"
+      />
+      <div class="alert alert-danger" *ngIf="prenomIsInvalid()">
+        <span *ngIf="prenomCtrl.hasError('required')">
+          Prénom obligatoire
+        </span>
+        <span *ngIf="prenomCtrl.hasError('minlength')">
+          Prénom obligatoire
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Manager:</label>
+      <input
+        name="Manager"
+        class="form-control"
+        placeholder="Votre manager"
+        [formControl]="managerCtrl"
+        [(ngModel)]="employe.manager"
+      />
+      <div class="alert alert-danger" *ngIf="managerIsInvalid()">
+        <span *ngIf="managerCtrl.hasError('required')">
+          Manager obligatoire
+        </span>
+        <span *ngIf="managerCtrl.hasError('minlength')">
+          Manager obligatoire
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Service:</label>
+      <input
+        name="Service"
+        class="form-control"
+        placeholder="Votre service"
+        [formControl]="serviceCtrl"
+        [(ngModel)]="employe.service"
+      />
+      <div class="alert alert-danger" *ngIf="serviceIsInvalid()">
+        <span *ngIf="serviceCtrl.hasError('required')">
+          Service obligatoire
+        </span>
+        <span *ngIf="serviceCtrl.hasError('minlength')">
+          Service obligatoire
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Login:</label>
+      <input
+        name="Email"
+        class="form-control"
+        placeholder="Votre email"
+        [formControl]="loginCtrl"
+      />
+      <div class="alert alert-danger" *ngIf="loginIsInvalid()">
+        <span *ngIf="loginCtrl.hasError('required')"> Login obligatoire </span>
+        <span *ngIf="loginCtrl.hasError('loginExist')">
+          Login indisponible
+        </span>
+        <span *ngIf="loginCtrl.hasError('minlength')"> Email obligatoire </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Mot de passe:</label>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        placeholder="******"
+        [formControl]="passwordCtrl"
+      />
+      <div class="alert alert-danger" *ngIf="passwordIsInvalid()">
+        <span *ngIf="passwordCtrl.hasError('required')">
+          Mot de passe obligatoire
+        </span>
+        <span *ngIf="passwordCtrl.hasError('pattern')">
+          Mot de passe de 3 caracteres avec 1 nombre et 1 lettre obligatoire
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Confirmer votre mot de passe:</label>
+      <input
+        type="password"
+        name="confirmation"
+        class="form-control"
+        placeholder="******"
+        [formControl]="confirmationCtrl"
+      />
+      <div class="alert alert-danger" *ngIf="passwordGroupIsInvalid()">
+        Les 2 mots de passes ne sont pas identiques
+      </div>
+    </div>
+    <div class="form-group">
+      <button
+        type="submit"
+        class="btn btn-outline-primary"
+        [disabled]="form.invalid"
+      >
+        enregistrer</button
+      ><a
+        routerLink="/home"
+        routerLinkActive="active"
+        class="btn btn-outline-warning"
+        >annuler</a
+      >
+    </div>
+  </form>
+</div>
