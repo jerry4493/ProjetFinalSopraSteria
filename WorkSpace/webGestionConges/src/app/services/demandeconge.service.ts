@@ -36,9 +36,9 @@ export class DemandecongeService {
     });
   }
 
-  public getEmploye(id: number): Observable<Employe[]> {
+  public getEmploye(id: number): Observable<Employe> {
     this.initHeader();
-    return this.http.get<Employe[]>(DemandecongeService.URL + '/' + id, {
+    return this.http.get<Employe>(DemandecongeService.URL + '/' + id, {
       headers: this.httpHeaders,
     });
   }
@@ -52,6 +52,21 @@ export class DemandecongeService {
         headers: this.httpHeaders,
       }
     );
+  }
+
+  public insertEmploye(employe: Employe): Observable<Employe> {
+    this.initHeader();
+    const employeFormate = {
+      id: employe.id,
+      nom: employe.nom,
+      prenom: employe.prenom,
+      service: employe.service,
+      manager: employe.manager,
+      login: employe.login,
+    };
+    return this.http.post<Employe>(DemandecongeService.URL, employeFormate, {
+      headers: this.httpHeaders,
+    });
   }
 
   public insert(conges: Conges): Observable<Conges> {

@@ -39,7 +39,9 @@ export class DemandecongeEditComponent implements OnInit {
     let debut = Date.now();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.employe = JSON.parse(localStorage.getItem('employe'));
+  }
 
   save() {
     if (this.id == -1) {

@@ -12,13 +12,13 @@ export class AuthentificationService {
 
   public authentification(login: Login) {}
 
-  public getAuthApi(login: Login): Observable<void> {
+  public getAuthApi(login: Login): Observable<Employe> {
     const texte: string = `${login.email}:${login.password}`;
     const headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       authorization: `Basic ${btoa(texte)}`,
     });
-    return this.http.get<void>('http://localhost:9001/api/auth/login', {
+    return this.http.get<Employe>('http://localhost:9001/api/auth/login', {
       headers: headers,
     });
   }
