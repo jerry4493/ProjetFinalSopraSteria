@@ -18,7 +18,7 @@ export class AuthentificationService {
       'Content-Type': 'application/json',
       authorization: `Basic ${btoa(texte)}`,
     });
-    return this.http.get<void>('http://localhost:9001/login', {
+    return this.http.get<void>('http://localhost:9001/inscription', {
       headers: headers,
     });
   }
