@@ -1,5 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { routes } from './routes';
 
 import { AppComponent } from './app.component';
 import { DemandecongeEditComponent } from './demandeconge/demandeconge-edit/demandeconge-edit.component';
@@ -15,7 +19,13 @@ import { ValidecongeListComponent } from './valideconge/valideconge-list/validec
     ValidecongeEditComponent,
     ValidecongeListComponent,
   ],
-  imports: [BrowserModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

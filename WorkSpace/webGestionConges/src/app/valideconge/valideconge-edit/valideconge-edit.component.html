@@ -1,1 +1,71 @@
-<p>valideconge-edit works!</p>
+<div>
+  <h1>validation demande</h1>
+  <div>
+    <div class="form-group">
+      <label for="id">id:</label>
+      <input
+        id="id"
+        class="form-control"
+        [(ngModel)]="conge.id"
+        placeholder="generation automatique"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <label for="id">Nom employé:</label>
+      <input id="nom" class="form-control" [(ngModel)]="employe.nom" readonly />
+    </div>
+    <div class="form-group">
+      <label for="type">type de congé:</label>
+      <input id="type" class="form-control" [(ngModel)]="conge.type" readonly />
+    </div>
+    <div class="form-group">
+      <label for="dateDebut">date de début:</label>
+      <input
+        id="dateDebut"
+        class="form-control"
+        [(ngModel)]="conge.dateDebut"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <label for="dateFin">date de fin:</label>
+      <input
+        id="dateFin"
+        class="form-control"
+        [(ngModel)]="conge.dateFin"
+        readonly
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="motif">motif du congé:</label>
+      <input
+        id="motif"
+        class="form-control"
+        [(ngModel)]="conge.motif"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <label for="service">service:</label>
+      <input
+        id="service"
+        class="form-control"
+        [(ngModel)]="employe.service"
+        readonly
+      />
+    </div>
+    <div>
+      <button class="btn btn-outline-info" (click)="validate()">
+        valider demande
+      </button>
+    </div>
+
+    <div>
+      <button (click)="delete(conge.id)" class="btn btn-outline-danger">
+        refuser demande
+      </button>
+    </div>
+  </div>
+</div>
