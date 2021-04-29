@@ -1,1 +1,45 @@
+<br />
+<div>
+  <h2>Gestionnaire de congés</h2>
+  <nav>
+    <br />
+    <ng-container *ngIf="login">Bonjour {{ login }}</ng-container>
+    <a class="btn btn-link" routerLink="/home" routerLinkActive="active"
+      >Accueil</a
+    >
+    <ng-container *ngIf="!login; else auth">
+      <a class="btn btn-link" routerLink="/login" routerLinkActive="active"
+        >Login</a
+      >
+      <a
+        class="btn btn-link"
+        routerLink="/demandeconge"
+        routerLinkActive="active"
+        >Demande de conges</a
+      >
+      <a
+        class="btn btn-link"
+        routerLink="/valideconge"
+        routerLinkActive="active"
+        >Validation de conges</a
+      >
+    </ng-container>
 
+    <ng-template #auth>
+      <a
+        class="btn btn-link"
+        routerLink="/demandeconge"
+        routerLinkActive="active"
+        >Demande de conges</a
+      >
+      <a
+        class="btn btn-link"
+        routerLink="/valideconge"
+        routerLinkActive="active"
+        >Validation de conges</a
+      >
+      <button class="btn btn-link" (click)="logout()">deconnexion</button>
+    </ng-template>
+  </nav>
+</div>
+<router-outlet></router-outlet>
