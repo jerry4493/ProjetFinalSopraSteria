@@ -1,7 +1,7 @@
 package com.formationsopra.apigc.entities;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -10,8 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -19,39 +21,51 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
-@Table(name = "employes")
+@Table(name = "employe")
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@SequenceGenerator(name = "seqEmploye", sequenceName = "seq_employe", initialValue = 100, allocationSize = 1)
-public class Employe  {
+@SequenceGenerator(name = "seqEmploye", sequenceName = "seq_employe", initialValue = 10, allocationSize = 1)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Employe.class)
+@JsonSerialize
+public class Employe implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 670425980100094539L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqEmploye")
 	private Integer id;
-	//@JsonView(Views.Common.class)
 	@NotEmpty
 	@Column(name = "prenom", length = 150, nullable = false)
 	private String prenom;
-	//@JsonView(Views.Common.class)
-	@Column(name = "nom", length = 150)
 	@NotEmpty
+	@Column(name = "nom", length = 150)
 	private String nom;
 	@NotEmpty
+	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY)
 	private List<Conges> conges;
 	@NotEmpty
 	@ManyToOne
-	private Manager manager;
+	@JoinColumn(name = "manager_id", referencedColumnName = "id")
+	private Employe manager;
 	@NotEmpty
+	@OneToOne
+	@JoinColumn(name = "login_id", referencedColumnName = "id")
 	private Login login;
 	@NotEmpty
 	@ManyToOne
+	@JoinColumn(name = "service_id", referencedColumnName = "id")
 	private Service service;
-	
+
 	public Employe() {
-		}
+	}
 
 	public Integer getId() {
 		return id;
@@ -85,11 +99,11 @@ public class Employe  {
 		this.conges = conges;
 	}
 
-	public Manager getManager() {
+	public Employe getManager() {
 		return manager;
 	}
 
-	public void setManager(Manager manager) {
+	public void setManager(Employe manager) {
 		this.manager = manager;
 	}
 
@@ -108,7 +122,7 @@ public class Employe  {
 	public void setService(Service service) {
 		this.service = service;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -133,6 +147,11 @@ public class Employe  {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Employe [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", conges=" + conges + ", manager="
+				+ manager + ", login=" + login + ", service=" + service + "]";
+	}
+
 }
-	

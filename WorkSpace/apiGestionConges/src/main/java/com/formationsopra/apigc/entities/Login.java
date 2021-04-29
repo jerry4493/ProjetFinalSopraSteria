@@ -1,6 +1,9 @@
 package com.formationsopra.apigc.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,21 +14,35 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "login")
 @SequenceGenerator(name = "seqLogin", sequenceName = "seq_login", initialValue = 10, allocationSize = 1)
-public class Login {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Login.class)
+@JsonSerialize
+public class Login implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7405361435110065636L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqLogin")
 	private Integer id;
+	@NotEmpty
 	@Email
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	@NotEmpty
 	@Column(name = "password", nullable = false)
 	private String password;
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
 	private Role role;
@@ -34,7 +51,7 @@ public class Login {
 		super();
 	}
 
-	public Login(@Email String email, @NotEmpty String password, Role role) {
+	public Login(@Email String email, String password, Role role) {
 		super();
 		this.email = email;
 		this.password = password;
