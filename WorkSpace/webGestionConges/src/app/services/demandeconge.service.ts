@@ -31,7 +31,7 @@ export class DemandecongeService {
 
   public getConges(): Observable<Conges[]> {
     this.initHeader();
-    return this.http.get<Conges[]>(DemandecongeService.URL, {
+    return this.http.get<Conges[]>(DemandecongeService.URL + '/list', {
       headers: this.httpHeaders,
     });
   }

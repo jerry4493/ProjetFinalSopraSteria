@@ -27,6 +27,8 @@ public class InscriptionWebService {
 
 	@Autowired
 	private LoginRepository loginRepository;
+	@Autowired
+	private PasswordEncoder passenc;
 	
 //	@Autowired
 //	private PasswordEncoder passwordEncoder;
@@ -58,6 +60,7 @@ public class InscriptionWebService {
 	@PostMapping(value = "/add", produces = "application/json")
 	public Login addOne(@RequestBody Login login) {
 		try {
+			login.setPassword(passenc.encode(login.getPassword()));
 			Login temp = loginRepository.save(login);
 			return temp;
 		} catch (Exception e) {
@@ -68,6 +71,7 @@ public class InscriptionWebService {
 
 	@PutMapping(value = "/update", produces = "application/json")
 	public Login updateOne(@RequestBody Login login) {
+		login.setPassword(passenc.encode(login.getPassword()));
 		return loginRepository.save(login);
 	}
 

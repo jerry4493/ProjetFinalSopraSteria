@@ -43,13 +43,7 @@ public class UserWebService {
 	@PostMapping(value = "/add", produces = "application/json")
 	public Employe addOne(@RequestBody Employe user) {
 		try {
-			Role role = user.getLogin().getRole();
-			if (role != Role.ROLE_USER) {
-				userRepository.save(user);
-				System.out.println("Le role attribué n'est pas bon !");
-			} else {
-				System.out.println("Le role attribué est bon !");
-			}
+			
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();

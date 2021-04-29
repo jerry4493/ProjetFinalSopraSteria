@@ -7,7 +7,7 @@ import { Conges } from '../model/conges';
   providedIn: 'root',
 })
 export class ValidecongeService {
-  private static URL = 'http://127.0.0.1:9001/api/validation';
+  private static URL = 'http://127.0.0.1:9001/api/conges';
   private httpHeaders: HttpHeaders;
 
   constructor(private http: HttpClient) {
@@ -17,7 +17,7 @@ export class ValidecongeService {
   private initHeader() {
     this.httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      //Authorization: `Basic ${localStorage.getItem('auth')}`,
+      Authorization: `Basic ${localStorage.getItem('auth')}`,
     });
   }
 
@@ -26,6 +26,15 @@ export class ValidecongeService {
     return this.http.get<Conges[]>(ValidecongeService.URL, {
       headers: this.httpHeaders,
     });
+  }
+  public getCongesByManager(id: number): Observable<Conges[]> {
+    this.initHeader();
+    return this.http.get<Conges[]>(
+      ValidecongeService.URL + '/listbymanager/' + id,
+      {
+        headers: this.httpHeaders,
+      }
+    );
   }
 
   public get(id: number): Observable<Conges> {

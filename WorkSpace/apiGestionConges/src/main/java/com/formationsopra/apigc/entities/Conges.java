@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -48,27 +49,27 @@ public class Conges implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqConges")
 	private Integer id;
-	@NotEmpty
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", nullable = false)
 	private TypeConge typeConges;
-	@NotEmpty
+	@NotNull
 	@Column(name = "date_demande", length = 15, nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate DateDemande;
-	@NotEmpty
+	private LocalDate dateDemande;
+	@NotNull
 	@Column(name = "date_debut", length = 15, nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate DateDebut;
-	@NotEmpty
+	private LocalDate dateDebut;
+	@NotNull
 	@Column(name = "date_fin", length = 15, nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate DateFin;
+	private LocalDate dateFin;
 	@NotEmpty
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
 	private String motif;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "employe_id", referencedColumnName = "id")
 	private Employe employe;
@@ -85,27 +86,27 @@ public class Conges implements Serializable {
 	}
 
 	public LocalDate getDateDemande() {
-		return DateDemande;
+		return dateDemande;
 	}
 
 	public void setDateDemande(LocalDate dateDemande) {
-		DateDemande = dateDemande;
+		this.dateDemande = dateDemande;
 	}
 
 	public LocalDate getDateDebut() {
-		return DateDebut;
+		return dateDebut;
 	}
 
 	public void setDateDebut(LocalDate dateDebut) {
-		DateDebut = dateDebut;
+		this.dateDebut = dateDebut;
 	}
 
 	public LocalDate getDateFin() {
-		return DateFin;
+		return dateFin;
 	}
 
 	public void setDateFin(LocalDate dateFin) {
-		DateFin = dateFin;
+		this.dateFin = dateFin;
 	}
 
 	public String getMotif() {

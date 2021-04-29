@@ -18,7 +18,10 @@ export class InscriptionService {
     login: string,
     password: string
   ): Observable<void> {
-    return this.http.post<void>('', { login: login, password: password });
+    return this.http.post<void>('http://127.0.0.1:9001/api/inscription/add', {
+      login: login,
+      password: password,
+    });
   }
 
   public checkLogin(login: string): Observable<boolean> {
