@@ -68,7 +68,7 @@ public class Conges implements Serializable {
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
 	private String motif;
-	@NotEmpty
+	
 	@ManyToOne
 	@JoinColumn(name = "employe_id", referencedColumnName = "id")
 	private Employe employe;

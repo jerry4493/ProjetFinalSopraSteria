@@ -35,14 +35,14 @@ public class Service implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4896302198779264168L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqService")
 	private Integer id;
 	@NotEmpty
 	@Column(name = "nom", unique = true, nullable = false)
 	private String nom;
-	@NotEmpty
+	
 	@OneToMany(mappedBy = "service", fetch = FetchType.EAGER)
 	private List<Employe> employes;
 

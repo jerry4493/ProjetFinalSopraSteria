@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -48,18 +49,18 @@ public class Employe implements Serializable {
 	@NotEmpty
 	@Column(name = "nom", length = 150)
 	private String nom;
-	@NotEmpty
+	@NotNull
 	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY)
 	private List<Conges> conges;
-	@NotEmpty
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "manager_id", referencedColumnName = "id")
 	private Employe manager;
-	@NotEmpty
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "login_id", referencedColumnName = "id")
 	private Login login;
-	@NotEmpty
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "service_id", referencedColumnName = "id")
 	private Service service;

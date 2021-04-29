@@ -11,6 +11,7 @@ import com.formationsopra.apigc.entities.Login;
 
 @Repository
 public interface LoginRepository extends JpaRepository<Login, Integer> {
+	public Optional <Login> findByEmail(String email);
 //	@Query("select l from Login l where l.login=:login")
 //	Optional<Login> findByLogin(@Param("login") String login);
 

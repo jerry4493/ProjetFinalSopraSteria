@@ -48,7 +48,7 @@ public class Login implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
 	private Role role;
-	@NotEmpty
+	
 	@OneToOne
 	@JoinColumn(name = "employe_id", referencedColumnName = "id")
 	private Employe employe;
