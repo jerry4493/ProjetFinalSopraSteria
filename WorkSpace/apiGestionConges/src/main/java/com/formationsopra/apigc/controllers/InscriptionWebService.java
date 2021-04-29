@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formationsopra.apigc.entities.Login;
@@ -26,14 +28,21 @@ public class InscriptionWebService {
 	@Autowired
 	private LoginRepository loginRepository;
 	
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
-//
-//	@GetMapping("/{login}")
-//	public boolean checkLogin(@PathVariable("login") String login) {
-//		loginRepository.findBy
-//		return true;
-//	}
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@GetMapping("/{login}")
+	public boolean checkLogin(@PathVariable("login") String login) {
+		Optional<Login> opt= loginRepository.findByLogin(login);
+		return opt.isPresent();
+	}
+	
+	@PostMapping("")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void inscription(@RequestBody Login login) {
+		login.setPassword(passwordEncoder.encode(login.getPassword()));
+		loginRepository.save(login);
+	}
 	
 	//=============== CRUD
 	@GetMapping(value = "/list", produces = "application/json")
