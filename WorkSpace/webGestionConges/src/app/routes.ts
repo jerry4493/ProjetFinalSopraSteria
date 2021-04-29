@@ -11,8 +11,7 @@ import { ValidecongeListComponent } from './valideconge/valideconge-list/validec
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-export const routes: Routes = [
-export const routes: Routes = [
+
   {
     path: 'validation',
     component: ValidecongeListComponent,
@@ -21,26 +20,22 @@ export const routes: Routes = [
     path: 'validation/edit',
     component: ValidecongeEditComponent,
   },
-];
+  {
+    path: 'conge/edit',
+    component: DemandecongeEditComponent,
+  },
+
+  {
+    path: 'conge',
+    component: DemandecongeListComponent,
+  },
+
+  { path: 'inscription', component: InscriptionComponent },
 
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-  { path: 'inscription', component: InscriptionComponent },
   { path: '**', component: PageIntrouvableComponent },
 ];
-
-
-  {path: 'conge/edit',
-  component: DemandecongeEditComponent},
-
-  {
-    path: 'conge',
-    component: DemandecongeListComponent
-  },
-];
-
-
-
 
 export const RoutesRoutes = RouterModule.forChild(routes);

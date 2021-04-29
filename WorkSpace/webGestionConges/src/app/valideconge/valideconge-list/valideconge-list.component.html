@@ -3,7 +3,7 @@
   <table class="table">
     <tr *ngFor="let conge of demandeconge | async">
       <td>{{ employe.nom }}</td>
-      <td>{{ conge.type }}</td>
+      <td>{{ conge.typeConge }}</td>
       <td>{{ conge.dateDebut | date: "dd/MM/yyyy" }}</td>
       <td>{{ conge.dateFin | date: "dd/MM/yyyy" }}</td>
       <td>{{ conge.motif }}</td>

@@ -6,8 +6,6 @@ export class Conges {
     private _dateFin?: Date,
     private _motif?: string,
     private _typeConge?: string
-
-    private _type?: string
   ) {}
 
   public get id(): number {
@@ -56,13 +54,5 @@ export class Conges {
 
   public set typeConge(value: string) {
     this._typeConge = value;
-  }
-
-  public get type(): string {
-    return this._type;
-  }
-
-  public set type(value: string) {
-    this._type = value;
   }
 }

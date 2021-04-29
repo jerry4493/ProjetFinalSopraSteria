@@ -11,51 +11,29 @@
       <a class="btn btn-link" routerLink="/login" routerLinkActive="active"
         >Login</a
       >
-      <a
-        class="btn btn-link"
-        routerLink="/demandeconge"
-        routerLinkActive="active"
+      <a class="btn btn-link" routerLink="/conge/edit" routerLinkActive="active"
         >Demande de conges</a
       >
-      <a
-        class="btn btn-link"
-        routerLink="/valideconge"
-        routerLinkActive="active"
+      <a class="btn btn-link" routerLink="/conge" routerLinkActive="active"
+        >Liste de conges</a
+      >
+      <a class="btn btn-link" routerLink="/validation" routerLinkActive="active"
         >Validation de conges</a
       >
     </ng-container>
-<a class="btn btn-link" routerLink="/validation" routerLinkActive="active"
-  >list</a
->
-<a class="btn btn-link" routerLink="/validation/edit" routerLinkActive="active"
-  >edit</a
->
 
     <ng-template #auth>
-      <a
-        class="btn btn-link"
-        routerLink="/demandeconge"
-        routerLinkActive="active"
+      <a class="btn btn-link" routerLink="/conge/edit" routerLinkActive="active"
         >Demande de conges</a
       >
-      <a
-        class="btn btn-link"
-        routerLink="/valideconge"
-        routerLinkActive="active"
+      <a class="btn btn-link" routerLink="/conge" routerLinkActive="active"
+        >Liste de conges</a
+      >
+      <a class="btn btn-link" routerLink="/validation" routerLinkActive="active"
         >Validation de conges</a
       >
       <button class="btn btn-link" (click)="logout()">deconnexion</button>
     </ng-template>
   </nav>
 </div>
-<router-outlet></router-outlet>
-
-<a class="btn btn-link" routerLink="/conge" routerLinkActive="active"
-        >liste conge</a
-      >
-      <a class="btn btn-link" routerLink="/conge/edit" routerLinkActive="active"
-        >edit conge</a
-      >
-    </nav>
-
 <router-outlet></router-outlet>
