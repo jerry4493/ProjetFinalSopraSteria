@@ -93,5 +93,10 @@ public class UserWebService {
 	public List<Employe> getAllByService(@PathVariable("pId") Integer id) {
 		return userRepository.findAllEmployeByServiceId(id);
 	}
+	
+	@GetMapping(value = "/getbylogin/{pId}", produces = "application/json")
+	public Employe getByLogin(@PathVariable("pId") Integer id) {
+		return userRepository.findEmployeByLogin(id);
+	}
 
 }

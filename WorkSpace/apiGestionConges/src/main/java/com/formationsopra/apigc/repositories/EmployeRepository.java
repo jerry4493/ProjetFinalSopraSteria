@@ -32,4 +32,8 @@ public interface EmployeRepository extends JpaRepository<Employe, Integer> {
 	@Query("select emp from Employe emp  left join fetch emp.login where emp.login.role='ROLE_USER'")
 	public List<Employe> findAllUser();
 
+	// récupérer un employe en fonction d'un login
+	@Query("select emp from Employe emp left join fetch emp.login where emp.login.id=:id")
+	public Employe findEmployeByLogin(@Param("id") Integer id);
+
 }

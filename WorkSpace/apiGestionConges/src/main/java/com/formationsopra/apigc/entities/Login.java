@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -46,6 +48,10 @@ public class Login implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
 	private Role role;
+	@NotEmpty
+	@OneToOne
+	@JoinColumn(name = "employe_id", referencedColumnName = "id")
+	private Employe employe;
 
 	public Login() {
 		super();

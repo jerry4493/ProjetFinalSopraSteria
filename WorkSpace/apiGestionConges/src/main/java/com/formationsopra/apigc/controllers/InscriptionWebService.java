@@ -28,22 +28,22 @@ public class InscriptionWebService {
 	@Autowired
 	private LoginRepository loginRepository;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@GetMapping("/{login}")
-	public boolean checkLogin(@PathVariable("login") String login) {
-		Optional<Login> opt= loginRepository.findByLogin(login);
-		return opt.isPresent();
-	}
-	
-	@PostMapping("")
-	@ResponseStatus(HttpStatus.CREATED)
-	public void inscription(@RequestBody Login login) {
-		login.setPassword(passwordEncoder.encode(login.getPassword()));
-		loginRepository.save(login);
-	}
-	
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+//	
+//	@GetMapping("/{login}")
+//	public boolean checkLogin(@PathVariable("login") String login) {
+//		Optional<Login> opt= loginRepository.findByLogin(login);
+//		return opt.isPresent();
+//	}
+//	
+//	@PostMapping("")
+//	@ResponseStatus(HttpStatus.CREATED)
+//	public void inscription(@RequestBody Login login) {
+//		login.setPassword(passwordEncoder.encode(login.getPassword()));
+//		loginRepository.save(login);
+//	}
+//	
 	//=============== CRUD
 	@GetMapping(value = "/list", produces = "application/json")
 	public List<Login> getAll() {
