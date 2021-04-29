@@ -42,46 +42,29 @@ public class Employe implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqEmploye")
 	private Integer id;
+	@NotEmpty
 	@Column(name = "prenom", length = 150, nullable = false)
 	private String prenom;
+	@NotEmpty
 	@Column(name = "nom", length = 150)
 	private String nom;
+	@NotEmpty
 	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY)
 	private List<Conges> conges;
+	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "manager_id", referencedColumnName = "id")
 	private Employe manager;
+	@NotEmpty
 	@OneToOne
-	//@JoinColumn(name = "login_id", referencedColumnName = "id")
+	@JoinColumn(name = "login_id", referencedColumnName = "id")
 	private Login login;
+	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "service_id", referencedColumnName = "id")
 	private Service service;
 
 	public Employe() {
-	}
-
-	public Employe(Integer id, @NotEmpty String prenom, @NotEmpty String nom, @NotEmpty List<Conges> conges,
-			@NotEmpty Employe manager, @NotEmpty Login login, @NotEmpty Service service) {
-		super();
-		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
-		this.conges = conges;
-		this.manager = manager;
-		this.login = login;
-		this.service = service;
-	}
-
-	public Employe(@NotEmpty String prenom, @NotEmpty String nom, @NotEmpty List<Conges> conges,
-			@NotEmpty Employe manager, @NotEmpty Login login, @NotEmpty Service service) {
-		super();
-		this.prenom = prenom;
-		this.nom = nom;
-		this.conges = conges;
-		this.manager = manager;
-		this.login = login;
-		this.service = service;
 	}
 
 	public Integer getId() {

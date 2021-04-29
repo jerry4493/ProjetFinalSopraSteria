@@ -24,6 +24,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -47,47 +48,32 @@ public class Conges implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqConges")
 	private Integer id;
-
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", nullable = false)
 	private TypeConge typeConges;
+	@NotEmpty
 	@Column(name = "date_demande", length = 15, nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate DateDemande;
+	@NotEmpty
 	@Column(name = "date_debut", length = 15, nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate DateDebut;
+	@NotEmpty
 	@Column(name = "date_fin", length = 15, nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate DateFin;
+	@NotEmpty
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
 	private String motif;
+	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "employe_id", referencedColumnName = "id")
 	private Employe employe;
 
 	public Conges() {
-	}
-
-	public Conges(Integer id, TypeConge typeConges, LocalDate dateDemande, LocalDate dateDebut, LocalDate dateFin,
-			String motif, Employe employe) {
-		super();
-		this.id = id;
-		this.typeConges = typeConges;
-		DateDemande = dateDemande;
-		DateDebut = dateDebut;
-		DateFin = dateFin;
-		this.motif = motif;
-		this.employe = employe;
-	}
-
-	public Conges(TypeConge typeConges, LocalDate dateDemande, LocalDate dateDebut, LocalDate dateFin, String motif,
-			Employe employe) {
-		super();
-		this.typeConges = typeConges;
-		DateDemande = dateDemande;
-		DateDebut = dateDebut;
-		DateFin = dateFin;
-		this.motif = motif;
-		this.employe = employe;
 	}
 
 	public Integer getId() {

@@ -39,8 +39,10 @@ public class Service implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqService")
 	private Integer id;
+	@NotEmpty
 	@Column(name = "nom", unique = true, nullable = false)
 	private String nom;
+	@NotEmpty
 	@OneToMany(mappedBy = "service", fetch = FetchType.EAGER)
 	private List<Employe> employes;
 

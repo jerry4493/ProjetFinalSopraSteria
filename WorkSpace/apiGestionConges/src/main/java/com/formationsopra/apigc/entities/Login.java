@@ -33,11 +33,14 @@ public class Login implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqLogin")
 	private Integer id;
+	@NotEmpty
 	@Email
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
+	@NotEmpty
 	@Column(name = "password", nullable = false)
 	private String password;
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
 	private Role role;
@@ -46,7 +49,7 @@ public class Login implements Serializable{
 		super();
 	}
 
-	public Login(@Email String email, @NotEmpty String password, Role role) {
+	public Login(@Email String email, String password, Role role) {
 		super();
 		this.email = email;
 		this.password = password;
