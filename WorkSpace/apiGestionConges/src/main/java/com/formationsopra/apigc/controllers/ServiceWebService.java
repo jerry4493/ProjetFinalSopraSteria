@@ -1,6 +1,7 @@
 package com.formationsopra.apigc.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -33,16 +34,16 @@ public class ServiceWebService {
 	}
 
 	@GetMapping(value = "/get/{pId}", produces = "application/json")
-	public Service getOne(@PathVariable("pId") Integer id) {
-		return serviceRepository.getOne(id);
+	public Optional<Service> getOne(@PathVariable("pId") Integer id) {
+		return serviceRepository.findById(id);
 	}
 
 	@PostMapping(value = "/add", produces = "application/json")
-	public Service addOne(@Valid @RequestBody Service service, BindingResult br) {
-		if (br.hasErrors()) {
-			// throw new FormateurInvalidException();
-			System.out.println("Il y a une erreur dans l'ajout du service !");
-		}
+	public Service addOne(@RequestBody Service service) {
+//		if (br.hasErrors()) {
+//			// throw new FormateurInvalidException();
+//			System.out.println("Il y a une erreur dans l'ajout du service !");
+//		}
 		return serviceRepository.save(service);
 	}
 

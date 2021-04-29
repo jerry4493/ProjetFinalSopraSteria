@@ -1,6 +1,7 @@
 package com.formationsopra.apigc.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,8 +31,8 @@ public class CongesWebService {
 	}
 
 	@GetMapping(value = "/get/{pId}", produces = "application/json")
-	public Conges getOne(@PathVariable("pId") Integer id) {
-		return congesRepository.getOne(id);
+	Optional<Conges> getOne(@PathVariable("pId") Integer id) {
+		return congesRepository.findById(id);
 	}
 
 	@PostMapping(value = "/add", produces = "application/json")
