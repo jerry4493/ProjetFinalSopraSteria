@@ -1,7 +1,7 @@
 <div>
   <h1>liste des demandes de congés</h1>
   <table class="table">
-    <tr *ngFor="let conge of demandeconge | async">
+    <tr *ngFor="let conge of demandeconge">
       <td>{{ employe.nom }}</td>
       <td>{{ conge.typeConge }}</td>
       <td>{{ conge.dateDebut | date: "dd/MM/yyyy" }}</td>

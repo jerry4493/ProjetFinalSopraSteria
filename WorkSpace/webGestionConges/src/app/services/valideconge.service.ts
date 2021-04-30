@@ -30,7 +30,7 @@ export class ValidecongeService {
   public getCongesByManager(id: number): Observable<Conges[]> {
     this.initHeader();
     return this.http.get<Conges[]>(
-      ValidecongeService.URL + '/listbymanager/' + id,
+      ValidecongeService.URL + '/list/manager/' + id,
       {
         headers: this.httpHeaders,
       }
@@ -39,16 +39,26 @@ export class ValidecongeService {
 
   public get(id: number): Observable<Conges> {
     this.initHeader();
-    return this.http.get<Conges>(`${ValidecongeService.URL}/${id}`, {
+    return this.http.get<Conges>(`${ValidecongeService.URL}/get/${id}`, {
       headers: this.httpHeaders,
     });
   }
 
-  public delete(id: number): Observable<void> {
+  public refus(conge: Conges): Observable<Conges> {
     this.initHeader();
-    return this.http.delete<void>(`${ValidecongeService.URL}/${id}`, {
-      headers: this.httpHeaders,
-    });
+    return this.http.patch<Conges>(
+      ValidecongeService.URL + '/refus/' + conge.id,
+      { motif: conge.motif },
+      { headers: this.httpHeaders }
+    );
+  }
+
+  public valide(conge: Conges): Observable<Conges> {
+    this.initHeader();
+    return this.http.get<Conges>(
+      ValidecongeService.URL + '/valide/' + conge.id,
+      { headers: this.httpHeaders }
+    );
   }
 
   public update(conge: Conges): Observable<Conges> {

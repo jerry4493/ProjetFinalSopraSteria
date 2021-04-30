@@ -1,3 +1,5 @@
+import { Employe } from './employe';
+
 export class Conges {
   public constructor(
     private _id?: number,
@@ -5,7 +7,9 @@ export class Conges {
     private _dateDebut?: Date,
     private _dateFin?: Date,
     private _motif?: string,
-    private _typeConge?: string
+    private _motifRefus?: string,
+    private _typeConge?: string,
+    private _employe?: Employe
   ) {}
 
   public get id(): number {
@@ -54,5 +58,21 @@ export class Conges {
 
   public set typeConge(value: string) {
     this._typeConge = value;
+  }
+
+  public get motifRefus(): string {
+    return this._motifRefus;
+  }
+
+  public set motifRefus(value: string) {
+    this._motifRefus = value;
+  }
+
+  public get employe(): Employe {
+    return this._employe;
+  }
+
+  public set employe(value: Employe) {
+    this._employe = value;
   }
 }

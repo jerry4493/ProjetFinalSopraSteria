@@ -17,7 +17,7 @@ export const routes: Routes = [
     component: ValidecongeListComponent,
   },
   {
-    path: 'validation/edit',
+    path: 'validation/edit/:id',
     component: ValidecongeEditComponent,
   },
   {

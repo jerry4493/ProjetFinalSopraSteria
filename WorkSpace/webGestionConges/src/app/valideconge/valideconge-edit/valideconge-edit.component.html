@@ -61,6 +61,11 @@
         readonly
       />
     </div>
+
+    <div class="form-group">
+      <label for="motif">refus:</label>
+      <input id="motif" class="form-control" [(ngModel)]="conge.motifRefus" />
+    </div>
     <div>
       <button class="btn btn-outline-info" (click)="validate()">
         valider demande
@@ -68,7 +73,7 @@
     </div>
 
     <div>
-      <button (click)="delete(conge.id)" class="btn btn-outline-danger">
+      <button class="btn btn-outline-danger" (click)="refuse()">
         refuser demande
       </button>
     </div>

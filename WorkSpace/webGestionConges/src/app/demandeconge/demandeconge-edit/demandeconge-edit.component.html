@@ -43,59 +43,70 @@
           class="form-control"
           ngDefaultControl
           [(ngModel)]="conge.dateDemande"
-          type="text"
+          type="date"
           placeholder="{{ dateajd }}"
-          readonly
         />
       </div>
 
-      <div class="form-group" ngDefaultControl [(ngModel)]="conge.typeConge">
-        <label for="typeConge">Type de congé:</label>
+      <!-- <div class="form-group" ngDefaultControl [(ngModel)]="conge.typeConge">
+        <label for="typedeconge">Type de congé:</label>
         <table style="width: 650px">
           <tr>
             <td>
               <input
                 type="radio"
-                id="congepayes"
+                id="typeconge"
                 name="typeconge"
-                value="congepayes"
+                value="typeconge.absautor"
                 checked
               />&nbsp;
-              <label for="congepayes">Congés payés</label>
+              <label for="typeconge">{{ typeconge.absautor }}</label>
             </td>
             <td>
               <input
                 type="radio"
-                id="congesanssolde"
+                id="typeconge"
                 name="typeconge"
-                value="congesanssolde"
+                value="typeconge.congesanssolde"
               />
               &nbsp;
-              <label for="congesanssolde">Congés sans soldes</label>
+              <label for="typeconge">{{ typeconge.congesanssolde }}</label>
             </td>
             <td>
               <input
                 type="radio"
-                id="absautor"
+                id="typeconge"
                 name="typeconge"
-                value="absautor"
+                value="typeconge.congepayes"
               />
               &nbsp;
-              <label for="absautor">Absence autorisée</label>
+              <label for="typeconge">{{ typeconge.congepayes }}</label>
             </td>
             <td>
               <input
                 type="radio"
-                id="absjusti"
+                id="typeconge"
                 name="typeconge"
-                value="absjusti"
+                value="typeconge.absjusti"
               />
               &nbsp;
-              <label for="absjusti">Absence justifiée</label>
+              <label for="typeconge">{{ typeconge.absjusti }}</label>
             </td>
           </tr>
         </table>
+      </div> -->
+      <div class="form-group">
+        <label for="typeConge">type congé:</label>
+        <select matNativeControl [(ngModel)]="conge.typeConge" name="type">
+          <option
+            *ngFor="let typeConge of keys(TypeConge)"
+            [ngValue]="typeConge"
+          >
+            {{ typeConge }}
+          </option>
+        </select>
       </div>
+
       <div class="form-group">
         <label for="dateDebutConge">Date de début de congé:</label>
         <input

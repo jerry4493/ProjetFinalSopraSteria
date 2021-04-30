@@ -29,11 +29,14 @@ export class DemandecongeService {
     });
   }
 
-  public getConges(): Observable<Conges[]> {
+  public getConges(id: number): Observable<Conges[]> {
     this.initHeader();
-    return this.http.get<Conges[]>(DemandecongeService.URL + '/list', {
-      headers: this.httpHeaders,
-    });
+    return this.http.get<Conges[]>(
+      DemandecongeService.URL + '/list/employe/' + id,
+      {
+        headers: this.httpHeaders,
+      }
+    );
   }
 
   public getEmploye(id: number): Observable<Employe> {
@@ -54,32 +57,25 @@ export class DemandecongeService {
     );
   }
 
-  public insertEmploye(employe: Employe): Observable<Employe> {
-    this.initHeader();
-    const employeFormate = {
-      id: employe.id,
-      nom: employe.nom,
-      prenom: employe.prenom,
-      service: employe.service,
-      manager: employe.manager,
-      login: employe.login,
-    };
-    return this.http.post<Employe>(DemandecongeService.URL, employeFormate, {
-      headers: this.httpHeaders,
-    });
-  }
-
   public insert(conges: Conges): Observable<Conges> {
     this.initHeader();
+    console.log(conges);
     const congesFormate = {
       dateDemande: conges.dateDemande,
       dateDebut: conges.dateDebut,
       dateFin: conges.dateFin,
       motif: conges.motif,
+      type: conges.typeConge,
+      employe: conges.employe,
     };
-    return this.http.post<Conges>(DemandecongeService.URL, congesFormate, {
-      headers: this.httpHeaders,
-    });
+    console.log(congesFormate);
+    return this.http.post<Conges>(
+      DemandecongeService.URL + '/add',
+      congesFormate,
+      {
+        headers: this.httpHeaders,
+      }
+    );
   }
 
   public delete(id: number): Observable<void> {

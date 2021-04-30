@@ -1,3 +1,4 @@
+import { TypeConge } from './../../type-conge.enum';
 import { Employe } from './../../model/employe';
 import { DemandecongeService } from './../../services/demandeconge.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +20,9 @@ export class DemandecongeEditComponent implements OnInit {
   pipe = new DatePipe('en-FR');
   now = Date.now();
 
+  keys = Object.keys;
+  TypeConge = TypeConge;
+
   dateajd = this.pipe.transform(this.now, 'dd/MM/yyyy');
 
   constructor(
@@ -26,16 +30,6 @@ export class DemandecongeEditComponent implements OnInit {
     private demandecongeService: DemandecongeService,
     private router: Router
   ) {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params.id) {
-        this.id = params.id;
-        this.demandecongeService.getDemandeConge(this.id).subscribe((data) => {
-          console.log(data);
-          this.conge = data;
-        });
-      }
-    });
-
     let debut = Date.now();
   }
 
@@ -44,14 +38,11 @@ export class DemandecongeEditComponent implements OnInit {
   }
 
   save() {
-    if (this.id == -1) {
-      this.demandecongeService.insert(this.conge).subscribe((data) => {
-        this.router.navigate(['/conge']);
-      });
-    } else {
-      this.demandecongeService.update(this.conge).subscribe((data) => {
-        this.router.navigate(['/conge']);
-      });
-    }
+    this.conge.employe = this.employe;
+    console.log(this.conge.employe, this.conge.motif, this.conge.id);
+    this.demandecongeService.insert(this.conge).subscribe((data) => {
+      this.conge = data;
+      this.router.navigate(['/conge']);
+    });
   }
 }

@@ -14,7 +14,6 @@ import { Employe } from 'src/app/model/employe';
 export class ValidecongeEditComponent implements OnInit {
   conge: Conges = new Conges();
   employe: Employe = new Employe();
-  demandeconge: Observable<Conges[]>;
 
   constructor(
     private validecongeService: ValidecongeService,
@@ -29,30 +28,25 @@ export class ValidecongeEditComponent implements OnInit {
         });
       }
     });
-    //this.demandeconge = this.demandecongeService.getConges(); => Récupérer demande congé de Morgan
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.employe = JSON.parse(localStorage.getItem('employe'));
+  }
 
-  delete(id: number) {
-    this.validecongeService.delete(id).subscribe((res) => {
-      this.demandeconge = this.validecongeService.list();
+  refuse() {
+    this.validecongeService.refus(this.conge).subscribe((res) => {
+      this.goList();
     });
   }
 
   validate() {
-    if (!!this.conge.id) {
-      this.validecongeService.update(this.conge).subscribe((res) => {
-        this.goList();
-      });
-    } else {
-      this.validecongeService.insert(this.conge).subscribe((res) => {
-        this.goList();
-      });
-    }
+    this.validecongeService.valide(this.conge).subscribe((res) => {
+      this.goList();
+    });
   }
 
   private goList() {
-    this.router.navigate(['/valideconge']);
+    this.router.navigate(['/validation']);
   }
 }

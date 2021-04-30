@@ -17,6 +17,9 @@ public interface CongesRepository extends JpaRepository<Conges, Integer> {
 	@Query("select cong from Conges cong left join fetch cong.employe where cong.employe.manager.id=:id")
 	public List<Conges> findCongesByManager(@Param("id") Integer id);
 	
+	@Query("select cong from Conges cong left join fetch cong.employe where cong.employe.id=:id")
+	public List<Conges> findCongeByEmploye(@Param("id") Integer id);
+	
 //	select *
 //	from conges cong
 //	left join employe emp on cong.employe_id=emp.id

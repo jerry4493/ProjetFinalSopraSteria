@@ -15,6 +15,8 @@ import { HomeComponent } from './home/home.component';
 import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.component';
 import { InscriptionComponent } from './formulaire/inscription/inscription.component';
 
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +35,7 @@ import { InscriptionComponent } from './formulaire/inscription/inscription.compo
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

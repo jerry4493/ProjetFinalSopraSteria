@@ -73,8 +73,22 @@ public class Conges implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "employe_id", referencedColumnName = "id")
 	private Employe employe;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "statut")
+	private StatutValidation statutValidation;
+	
+
 
 	public Conges() {
+	}
+
+	public StatutValidation getStatutValidation() {
+		return statutValidation;
+	}
+
+	public void setStatutValidation(StatutValidation statutValidation) {
+		this.statutValidation = statutValidation;
 	}
 
 	public Integer getId() {

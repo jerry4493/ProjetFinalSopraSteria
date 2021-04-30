@@ -10,11 +10,21 @@ import { ValidecongeService } from 'src/app/services/valideconge.service';
   styleUrls: ['./valideconge-list.component.css'],
 })
 export class ValidecongeListComponent implements OnInit {
-  demandeconge: Observable<Conges[]>;
+  demandeconge: Conges[] = [];
   employe: Employe = new Employe();
   constructor(private validecongeService: ValidecongeService) {}
 
   ngOnInit(): void {
-    this.demandeconge = this.validecongeService.list();
+    this.employe = JSON.parse(localStorage.getItem('employe'));
+    this.list();
+  }
+
+  private list() {
+    this.validecongeService
+      .getCongesByManager(this.employe.id)
+      .subscribe((data) => {
+        this.demandeconge = data;
+        console.log(data);
+      });
   }
 }
